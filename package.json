@@ -1,0 +1,25 @@
+{
+  "name": "cadastro",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
+    "start": "npm-run-all -p nodemon browsersync",
+    "nodemon": "nodemon src/server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:5001 --files ['public', 'src', 'app', 'views']"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.0",
+    "method-override": "^3.0.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "nodemon": "^3.1.7",
+    "npm-run-all": "^4.1.5"
+  }
+}
