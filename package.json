@@ -15,7 +15,8 @@
   "dependencies": {
     "express": "^4.21.0",
     "method-override": "^3.0.0",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "browser-sync": "^3.0.2",
