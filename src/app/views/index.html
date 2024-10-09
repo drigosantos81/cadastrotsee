@@ -4,21 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/styles.css">
-	<title>Unidade do Cadastro</title>
+	<title>Unidade do Cadastro | REPERCUSSÃO</title>
 </head>
 <body>    
 
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
-			<div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+			<div class="sidebar-heading border-bottom bg-light">Cadastro TSEE</div>
 			<div class="list-group list-group-flush">
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Repercussão</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">CadÚnico</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">BPC</a>
 			</div>
 		</div>
 
@@ -50,23 +47,31 @@
 
 			<!-- Page content-->
 			<div class="container-fluid">
-				<h1 class="mt-4">Simple Sidebar</h1>
-				<p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-				<p>
-						<form onsubmit="salvar" action="">
-							<input type="text" id="nome" name="" placeholder="Nome"><br>
-							<input type="password" id="senha" name="" placeholder="Senha"><br>
-							<input type="submit" value="Enviar">
-						</form>
-				</p>
+				<h1 class="mt-4">Lista de Repercussão</h1>				
 
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Funcionários ativos</h6>
+						<!-- <h6 class="m-0 font-weight-bold text-primary">Funcionários ativos</h6> -->
 						<div>
-							<h6>Salário Total Bruto dos Funcionários: </h6>
+							<h6>Registros de retirada </h6>
 							<h6 onclick="sumValues()"> {{ sumSalary }}</h6>
+
+              <div class="search">
+                <form action="/busca" method="get">
+                  <input
+                    type="text" 
+                    name="filter" 
+                    placeholder="Buscar uma receita"
+                    {% if search.term %}
+                      value={{search.term}}
+                    {% endif %}
+                  >
+                  {# filter #}
+                  <button type="submit">Buscar</button>
+                </form>
+              </div>
+
 						</div>
 					</div>
 					<div class="card-body">
@@ -74,26 +79,34 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead class="table-thead-home">
 									<tr>
-										<th>Nome</th>
-										<th>Função</th>
-										<th>Lotação</th>
-										<th>Contratação</th>
-										<th>Idade</th>
-										<th>Salário</th>
-										<th>Detalhes</th>
+										<th>Referencia</th>
+										<th>CFAM</th>
+										<th>NB</th>
+										<th>Instalação</th>
+										<th>Especie</th>
+										<th>Motivo Validação</th>
+										<th>Contrato</th>
+                    <th>Conta Contrato</th>
+                    <th>Situação</th>
+                    <th>Ação</th>
 									</tr>
 								</thead>
-
+                
 								<tbody class="tbody-func">
-									{% for funcionario in funcionarios %}
-										<tr class="employments" id="{{funcionario.id}}">
-											<td>{{funcionario.first_nome}}</td>
-											<td>{{funcionario.funcao}}</td>
-											<td>{{funcionario.setor}}</td>
-											<td>{{funcionario.data_admissao}}</td>
-											<td>{{funcionario.nascimento}}</td>
-											<td id="salario">{{funcionario.salario}}</td>
-											<td><a class="ver-detalhes" href="/cadastros/funcionarios/show-funcionario/{{funcionario.id}}">Editar</a></td>
+									{% for 1repercussao in repercussao %}
+										<tr class="employments" id="{{repercussao.id}}">
+											<td>{{1repercussao.referencia}}</td>
+											<td>{{1repercussao.cod_familiar_fam}}</td>
+											<td>{{1repercussao.nb}}</td>
+                      <td>{{1repercussao.cod_uc}}</td>
+											<td>{{1repercussao.especie}}</td>
+                      <td>{{1repercussao.motivo_validacao}}</td>
+                      <td>{{1repercussao.CONTRATO}}</td>
+                      <td>{{1repercussao.CONTA_CONTRATO}}</td>
+                      <td>{{1repercussao.situacao}}</td>
+                      <td>{{1repercussao.ACAO}}</td>
+											<!-- <td id="salario">{{1repercussao.salario}}</td> -->
+											<!-- <td><a class="ver-detalhes" href="/cadastros/funcionarios/show-funcionario/{{funcionario.id}}">Editar</a></td> -->
 										</tr>
 									{% endfor %}
 								</tbody>
@@ -102,13 +115,13 @@
       		</div>
     		</div>
 
-				<p>
-					Make sure to keep all page content within the
-					<code>#page-content-wrapper</code>
-					. The top navbar is optional, and just for demonstration. Just create an element with the
-					<code>#sidebarToggle</code>
-					ID which will toggle the menu when clicked.
-				</p>
+        <p>
+          <form onsubmit="salvar" action="">
+            <input type="text" id="nome" name="" placeholder="Nome"><br>
+            <input type="password" id="senha" name="" placeholder="Senha"><br>
+            <input type="submit" value="Enviar">
+          </form>
+        </p>
 			</div>
 		</div>
 	</div>
